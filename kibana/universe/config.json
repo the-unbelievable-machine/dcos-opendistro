@@ -162,6 +162,17 @@
               }
             }
           }
+        },
+        "prometheus_exporter": {
+          "type": "object",
+          "description": "pjhampton/kibana-prometheus-exporter",
+          "properties": {
+            "enabled": {
+              "description": "OpenDistro security plugin is excluded if not enabled",
+              "type": "boolean",
+              "default": true
+            }
+          }
         }
       },
       "required": [
