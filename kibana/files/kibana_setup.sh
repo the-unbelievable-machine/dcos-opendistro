@@ -43,6 +43,12 @@ EOF
 	fi
 fi
 
+if [ "$PROMETHEUS_EXPORTER_ENABLED" = true ]; then
+	echo "Installing kibanaPrometheusExporter plugin (version: $PROMETHEUS_EXPORTER_VERSION) ..."
+	$MESOS_SANDBOX/kibana-$ELASTIC_VERSION-linux-x86_64/bin/kibana-plugin install file://$MESOS_SANDBOX/kibanaPrometheusExporter-${PROMETHEUS_EXPORTER_VERSION}.zip
+	echo -e "opendistro_security.auth.unauthenticated_routes: ['/api/status', '/api/reporting/stats', '/_prometheus/metrics']"  >> $KIBANA_YAML
+fi
+
 $MESOS_SANDBOX/kibana-$ELASTIC_VERSION-linux-x86_64/bin/kibana-plugin install file://$MESOS_SANDBOX/opendistroAlertingKibana-${OPENDISTRO_ALERTING_VERSION}.zip
 $MESOS_SANDBOX/kibana-$ELASTIC_VERSION-linux-x86_64/bin/kibana-plugin install file://$MESOS_SANDBOX/opendistroIndexManagementKibana-${OPENDISTRO_SECURITY_VERSION}.zip
 
